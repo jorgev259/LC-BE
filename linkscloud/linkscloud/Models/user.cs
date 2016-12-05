@@ -25,7 +25,7 @@ namespace linkscloud.Models
 
         public static String add_user(string username, string email, string password)
         {
-            int respuesta = 0;
+            String response = "";
 
             Coneccion conx_detalles = new Coneccion();
 
@@ -41,15 +41,35 @@ namespace linkscloud.Models
             conx_detalles.annadir_parametro("_email", email);
             conx_detalles.annadir_parametro("_password", password);            
             conx_detalles.annadir_parametro("_joined", DateTime.Now);
-            CONTENEDOR = conx_detalles.busca();
-            while (CONTENEDOR.Read())
+
+            //This set will try to execute the query
+            try
             {
-                respuesta = Convert.ToInt32(CONTENEDOR[0].ToString());
+                CONTENEDOR = conx_detalles.busca();
+                while (CONTENEDOR.Read())
+                {
+                    response = "Complete";
+                }
+                
+                CONTENEDOR.Close();
+            } //If it fails it will capture the exception, e.Number returns the error number indetifier
+            catch (MySqlException e)
+            {
+                switch (e.Number) //Add case for each e.Number
+                {
+                    case 1062: //Neds checking with e.Error to know if its email or username that's wrong
+                        response = "Username or email already exists";
+                        break;
+                    default:
+                        response = "Unexpected Error";
+                        break;
+                }
             }
+            
             conx_detalles.conexion.Close();
             conx_detalles.conexion.Dispose();
-            CONTENEDOR.Close();
-            return "Complete";
+            
+            return response;
         }
 
         //public static int eliminar_Bebidas(int Cod_bebida)
