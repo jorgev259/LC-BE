@@ -57,8 +57,8 @@ namespace linkscloud.Models
             {
                 switch (e.Number) //Add case for each e.Number
                 {
-                    case 1062: //Neds checking with e.Error to know if its email or username that's wrong
-                        response = "Username or email already exists";
+                    case 1062: //Needs checking with e.Error to know if its email or username that's wrong
+                        response = e.Message.Split(new string[] { "key " }, StringSplitOptions.None)[1] + " already exists";
                         break;
                     default:
                         response = "Unexpected Error";
