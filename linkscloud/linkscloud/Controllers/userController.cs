@@ -24,6 +24,19 @@ namespace linkscloud.Controllers
                     result._password = null;
                     response = new JavaScriptSerializer().Serialize(result);
                     break;
+                case "login":
+                    user data = user.info_user("username", Request["username"]);
+                    if(Request["key"] == data._password)
+                    {
+                        response = "true";
+                    }else
+                    {
+                        response = "false";
+                    }
+                    break;
+                default:
+                    response = "Unknown Request";
+                    break;
             }
 
             return response;
