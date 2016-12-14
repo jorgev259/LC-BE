@@ -37,6 +37,7 @@ namespace linkscloud.Controllers
                     //{
                     //    response.Insert(0, "false");
 
+                    response = user.login(Request["username"],Request["pass"]);
 
                     break;
 
