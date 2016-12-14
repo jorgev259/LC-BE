@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -73,60 +74,6 @@ namespace linkscloud.Models
             return response;
         }
 
-        //public static int eliminar_Bebidas(int Cod_bebida)
-        //{
-        //    int respuesta = 0;
-
-        //    Coneccion conx_detalles = new Coneccion();
-        //    conx_detalles.parametro();
-        //    conx_detalles.inicializa();
-        //    string CONSULTA;
-        //   MySqlDataReader CONTENEDOR;
-
-        //    CONSULTA = "EXEC ELIMINAR_BEBIDAS ?";
-        //    conx_detalles.annadir_consulta(CONSULTA);
-        //    conx_detalles.annadir_parametro(Cod_bebida.ToString(), 1);
-        //    CONTENEDOR = conx_detalles.busca();
-        //    while (CONTENEDOR.Read())
-        //    {
-        //        respuesta = Convert.ToInt32(CONTENEDOR[0].ToString());
-        //    }
-        //    conx_detalles.conexion.Close();
-        //    conx_detalles.conexion.Dispose();
-        //    CONTENEDOR.Close();
-        //    return respuesta;
-        //}
-
-        //public static int modificar_Bebidas(string username, string email, string password)
-        //{
-        //    int respuesta = 0;
-
-        //    Coneccion conx_detalles = new Coneccion();
-        //    conx_detalles.parametro();
-        //    conx_detalles.inicializa();
-        //    string CONSULTA;
-        //   MySqlDataReader CONTENEDOR;
-
-        //    CONSULTA = "EXEC MODIFICAR_BEBIDAS ?,?,?,?,?,?,?,?";
-        //    conx_detalles.annadir_consulta(CONSULTA);
-        //    //conx_detalles.annadir_parametro(Cod_bebida, 1);
-        //    //conx_detalles.annadir_parametro(Nombre, 2);
-        //    //conx_detalles.annadir_parametro(ingredientes, 2);
-        //    //conx_detalles.annadir_parametro(precio_ind, 1);
-        //    //conx_detalles.annadir_parametro(precio_por, 1);
-        //    //conx_detalles.annadir_parametro(Precio_T_ind, 1);
-        //    //conx_detalles.annadir_parametro(Precio_T_porc, 1);
-        //    //conx_detalles.annadir_parametro(foto, 2);
-        //    CONTENEDOR = conx_detalles.busca();
-        //    while (CONTENEDOR.Read())
-        //    {
-        //        respuesta = Convert.ToInt32(CONTENEDOR[0].ToString());
-        //    }
-        //    conx_detalles.conexion.Close();
-        //    conx_detalles.conexion.Dispose();
-        //    CONTENEDOR.Close();
-        //    return respuesta;
-        //}
 
         public static user info_user(string criteria,Object _parametro)
         {
@@ -156,28 +103,56 @@ namespace linkscloud.Models
                 user.id = Convert.ToInt32(CONTENEDOR["id"]);
                 user.email = CONTENEDOR["email"].ToString();
                 user.username = CONTENEDOR["username"].ToString();
-                user.password = CONTENEDOR["password"].ToString();
+                user.password = CONTENEDOR["passkey"].ToString();
                 user.joined = Convert.ToDateTime(CONTENEDOR["joined"]);
-
-                //try
-                //{
-                //    byte[] bytes = Convert.FromBase64String(CONTENEDOR["FOTO"].ToString());
-                //    MemoryStream memory_foto = new MemoryStream(bytes);
-                //    Bitmap bmp = (Bitmap)Bitmap.FromStream(memory_foto);
-
-                //    NuevaBebida.foto = bmp;
-                //    memory_foto.Close();
-                //}
-                //catch (System.FormatException h)
-                //{
-                //    NuevaBebida.foto = null;
-                //}
             }
             cnx.conexion.Close();
             cnx.conexion.Dispose();
             CONTENEDOR.Close();
 
             return user;
+        }
+
+        public static String login(String username,String pass)
+        {
+            var cnx = new Coneccion();
+            cnx.parametro();
+            cnx.inicializa();
+
+
+            using (MySqlConnection connection = cnx.conexion)
+            {
+                MySqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = "SELECT * FROM user WHERE username=@username AND passkey=@pass LIMIT 1;";
+                cmd.Parameters.AddWithValue("@username",username);
+                cmd.Parameters.AddWithValue("@pass",pass);
+
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    if (dataReader.HasRows)
+                    {
+                        //Succesful login
+                    }
+                    else
+                    {
+                        dataReader.Close();
+                        //No login
+                        cmd.CommandText = "SELECT * FROM user WHERE username=@username LIMIT 1;";
+                        MySqlDataReader dataReader2 = cmd.ExecuteReader();
+
+                        if (dataReader2.HasRows)
+                        {
+                            //Wrong password
+                        }
+                        else
+                        {
+                            //User doesnt exist
+                        }
+                    }
+                }
+            }
+
+            return "";
         }
     }
 }
