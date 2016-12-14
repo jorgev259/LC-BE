@@ -17,7 +17,7 @@ namespace linkscloud.Controllers
             switch (Request["proc"])
             {
                 case "register":
-                    response = user.add_user(Request["username"], Request["email"], Request["passkey"]);
+                    response = user.add_user(Request["username"], Request["email"], Request["passkey"]); 
                     break;
 
                 case "info":
@@ -27,16 +27,6 @@ namespace linkscloud.Controllers
                     break;
 
                 case "login":
-                    //user data = user.info_user("username", Request["username"]);
-                    //response= new JavaScriptSerializer().Serialize(data);
-
-                    //if (Request["password"] == data._password)
-                    //{ 
-                    //    response.Insert(0,"true");
-                    //}else
-                    //{
-                    //    response.Insert(0, "false");
-
                     response = user.login(Request["username"],Request["pass"]);
 
                     break;

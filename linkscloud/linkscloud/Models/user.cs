@@ -63,7 +63,7 @@ namespace linkscloud.Models
                         response = split[split.Length-1] + " already exists";
                         break;
                     default:
-                        response = "Unexpected Error";
+                        response = "Unexpected Error, try again later";
                         break;
                 }
             }
@@ -129,9 +129,10 @@ namespace linkscloud.Models
 
                 using (MySqlDataReader dataReader = cmd.ExecuteReader())
                 {
+ 
                     if (dataReader.HasRows)
                     {
-                        //Succesful login
+                        return "logged";
                     }
                     else
                     {
@@ -143,16 +144,21 @@ namespace linkscloud.Models
                         if (dataReader2.HasRows)
                         {
                             //Wrong password
+                            return "Wrong Password";
                         }
                         else
                         {
                             //User doesnt exist
+                            return "Non-valid user";
                         }
+                    }
+
+                    if(dataReader.IsClosed == false)
+                    {
+                        dataReader.Close();
                     }
                 }
             }
-
-            return "";
         }
     }
 }
