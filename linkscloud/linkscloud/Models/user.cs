@@ -46,13 +46,9 @@ namespace linkscloud.Models
             //This set will try to execute the query
             try
             {
-                CONTENEDOR = conx_detalles.busca();
-                while (CONTENEDOR.Read())
-                {
-                    response = "Complete";
-                }
-                
+                CONTENEDOR = conx_detalles.busca();                
                 CONTENEDOR.Close();
+                response = "Complete";
             } //If it fails it will capture the exception, e.Number returns the error number indetifier
             catch (MySqlException e)
             {
