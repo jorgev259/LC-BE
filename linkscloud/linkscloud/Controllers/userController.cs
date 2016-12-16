@@ -17,12 +17,22 @@ namespace linkscloud.Controllers
             switch (Request["proc"])
             {
                 case "register":
-                    response = user.add_user(Request["username"], Request["email"], Request["passkey"]);
+                    response = user.add_user(Request["username"], Request["email"], Request["passkey"]); 
                     break;
+
                 case "info":
                     user result = user.info_user(Request["criteria"], Request["identifier"]);
                     result._password = null;
                     response = new JavaScriptSerializer().Serialize(result);
+                    break;
+
+                case "login":
+                    response = user.login(Request["username"],Request["pass"]);
+
+                    break;
+
+                default:
+                    response = "Unknown Request";
                     break;
             }
 
