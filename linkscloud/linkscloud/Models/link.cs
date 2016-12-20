@@ -90,7 +90,7 @@ namespace linkscloud.Models
             desc = _desc;
         }
 
-        public static void new_link(link data)
+        public static String new_link(link data)
         {
             var response = "";
 
@@ -131,7 +131,7 @@ namespace linkscloud.Models
             cnx.conexion.Close();
             cnx.conexion.Dispose();
 
-
+            return response;
         } 
 
 

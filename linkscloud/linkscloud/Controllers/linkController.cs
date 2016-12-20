@@ -17,9 +17,8 @@ namespace linkscloud.Controllers
             switch (Request["proc"])
             {
                 case "new":
-                    link res = new link(Convert.ToInt32(Request["id_owner"]), Request["title"], Request["url"], Request["desc"]);
-                    link.new_link(res);
-                    response = new JavaScriptSerializer().Serialize(res);
+                    link link = new link(Convert.ToInt32(Request["id_owner"]), Request["title"], Request["url"], Request["desc"]);
+                    response = link.new_link(link);
                     break;
 
                 default:
