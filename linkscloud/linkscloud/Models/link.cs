@@ -82,12 +82,12 @@ namespace linkscloud.Models
         }
         */
 
-        public link(int id_owner, string title, string url, string desc)
+        public link(int _id_owner, string _title, string _url, string _desc)
         {
-            this.id_owner = id_owner;
-            this.title = title;
-            this.url = url;
-            this.desc = desc;
+            id_owner = _id_owner;
+            title = _title;
+            url = _url;
+            desc = _desc;
         }
 
         public static void new_link(link data)
