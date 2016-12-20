@@ -30,7 +30,7 @@ namespace linkscloud.Models
             joined = DateTime.Now;
         }
 
-        public static String add_user(string username, string email, string password)
+        public static String add_user(user data)
         {
             String response = "";
 
@@ -44,9 +44,9 @@ namespace linkscloud.Models
 
             CONSULTA = "ADD_USER";
             conx_detalles.annadir_consulta(CONSULTA);
-            conx_detalles.annadir_parametro("_username", username);
-            conx_detalles.annadir_parametro("_email", email);
-            conx_detalles.annadir_parametro("_password", password);            
+            conx_detalles.annadir_parametro("_username", data.username);
+            conx_detalles.annadir_parametro("_email", data.email);
+            conx_detalles.annadir_parametro("_password", data.password);            
             conx_detalles.annadir_parametro("_joined", DateTime.Now);
 
             //This set will try to execute the query

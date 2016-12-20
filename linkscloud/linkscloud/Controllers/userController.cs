@@ -17,7 +17,8 @@ namespace linkscloud.Controllers
             switch (Request["proc"])
             {
                 case "register":
-                    response = user.add_user(Request["username"], Request["email"], Request["passkey"]); 
+                    user user = new user(Request["username"], Request["email"], Request["passkey"]);
+                    response = user.add_user(user); 
                     break;
 
                 case "info":
