@@ -16,13 +16,14 @@ namespace linkscloud.Models
         private string password;
         private DateTime joined;
 
-        public user() { }
 
-        public int _id { get { return id; } set { id = value; } }
-        public string _username { get { return username; } set { username = value; } }
-        public string _email { get { return email; } set { email = value; } }
-        public string _password { get { return password; } set { password = value; } }
-        public DateTime _joined { get { return joined; } set { joined = value; } }
+        public user(string _username, string _email, string _password)
+        {
+            username = _username;
+            password = _email;
+            email = _password;
+            joined = DateTime.Now;
+        }
 
         public static String add_user(string username, string email, string password)
         {
