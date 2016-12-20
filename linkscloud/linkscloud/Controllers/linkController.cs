@@ -6,7 +6,7 @@ using System.Web.Script.Serialization;
 
 namespace linkscloud.Controllers
 {
-    public class linkController : Controller
+    public class linkController : ApiController
     {
         [HttpPost]
         public String Post()
@@ -18,7 +18,7 @@ namespace linkscloud.Controllers
             {
                 case "new":
                     link res = new link(Convert.ToInt32(Request["id_owner"]), Request["title"], Request["url"], Request["desc"]);
-                    res.new_link();
+                    link.new_link(res);
                     response = new JavaScriptSerializer().Serialize(res);
                     break;
 
