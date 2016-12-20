@@ -16,6 +16,11 @@ namespace linkscloud.Models
         private string password;
         private DateTime joined;
 
+        public int _id { get { return id; } set { id = value; } }
+        public string _username { get { return username; } set { username = value; } }
+        public string _email { get { return email; } set { email = value; } }
+        public string _password { get { return password; } set { password = value; } }
+        public DateTime _joined { get { return joined; } set { joined = value; } }
 
         public user(string _username, string _email, string _password)
         {
@@ -74,7 +79,7 @@ namespace linkscloud.Models
 
         public static user info_user(string criteria,Object _parametro)
         {
-            user user = new user();
+            user user = new user("","","");
             Coneccion cnx = new Coneccion();
             cnx.parametro();
             cnx.inicializa();
