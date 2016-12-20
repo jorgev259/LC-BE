@@ -12,16 +12,16 @@ namespace linkscloud.Models
 
 
         //private variables 
-        public int id;
-        public int id_owner;
-        public string title;
-        public string url;
-        public string desc;
+        private int id;
+        private int id_owner;
+        private string title;
+        private string url;
+        private string desc;
 
         //solving the pics problem to introduce later
 
-        /*public variables
-        public int id
+        //public variables
+        public int _id
         {
             get
             {
@@ -33,7 +33,7 @@ namespace linkscloud.Models
             }
         }
 
-        public int id_owner
+        public int _id_owner
         {
             get
             {
@@ -45,7 +45,7 @@ namespace linkscloud.Models
             }
         }
 
-        public string title
+        public string _title
         {
             get
             {
@@ -57,7 +57,7 @@ namespace linkscloud.Models
             }
         }
 
-        public string url
+        public string _url
         {
             get
             {
@@ -69,7 +69,7 @@ namespace linkscloud.Models
             }
         }
 
-        public string desc
+        public string _desc
         {
             get
             {
@@ -80,7 +80,7 @@ namespace linkscloud.Models
                 _desc = value;
             }
         }
-        */
+
 
         public link(int _id_owner, string _title, string _url, string _desc)
         {
