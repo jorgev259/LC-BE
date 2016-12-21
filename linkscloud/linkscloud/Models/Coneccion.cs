@@ -15,6 +15,7 @@ namespace linkscloud.Models
             comando = new MySqlCommand();
             //strconexion = "Provider=SQLOLEDB;Data Source=scopecedes.database.windows.net;Initial Catalog=ScopeCedes;PersisSecurityInfo=True;User ID=scope;Password=Cedes123;Poling=False";
             conexion.ConnectionString = "Database=linksclouds;Data Source=us-cdbr-azure-central-a.cloudapp.net;User Id=b7fe8bcdfc29e8;Password=e464963d";
+            //conexion.ConnectionString = "server=127.0.0.1;user id=root;database=linkscloud;Password=adiviname";
         }
 
 

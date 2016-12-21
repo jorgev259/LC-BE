@@ -16,15 +16,21 @@ namespace linkscloud.Models
         private string password;
         private DateTime joined;
 
-        public user() { }
-
         public int _id { get { return id; } set { id = value; } }
         public string _username { get { return username; } set { username = value; } }
         public string _email { get { return email; } set { email = value; } }
         public string _password { get { return password; } set { password = value; } }
         public DateTime _joined { get { return joined; } set { joined = value; } }
 
-        public static String add_user(string username, string email, string password)
+        public user(string _username, string _email, string _password)
+        {
+            username = _username;
+            password = _password;
+            email = _email;
+            joined = DateTime.Now;
+        }
+
+        public static String add_user(user data)
         {
             String response = "";
 
@@ -38,9 +44,9 @@ namespace linkscloud.Models
 
             CONSULTA = "ADD_USER";
             conx_detalles.annadir_consulta(CONSULTA);
-            conx_detalles.annadir_parametro("_username", username);
-            conx_detalles.annadir_parametro("_email", email);
-            conx_detalles.annadir_parametro("_password", password);            
+            conx_detalles.annadir_parametro("_username", data.username);
+            conx_detalles.annadir_parametro("_email", data.email);
+            conx_detalles.annadir_parametro("_password", data.password);            
             conx_detalles.annadir_parametro("_joined", DateTime.Now);
 
             //This set will try to execute the query
@@ -73,7 +79,7 @@ namespace linkscloud.Models
 
         public static user info_user(string criteria,Object _parametro)
         {
-            user user = new user();
+            user user = new user("","","");
             Coneccion cnx = new Coneccion();
             cnx.parametro();
             cnx.inicializa();

@@ -6,20 +6,19 @@ using System.Web.Script.Serialization;
 
 namespace linkscloud.Controllers
 {
-    public class linkController : Controller
+    public class linkController : ApiController
     {
         [HttpPost]
         public String Post()
         {
             var Request = HttpContext.Current.Request;
-            var respone = "";
+            var response = "";
 
             switch (Request["proc"])
             {
                 case "new":
-                    link res = new link(Request["id_owner"], Request["title"], Request["url"], Request["desc"]);
-                    res.new_link();
-                    response = new JavaScriptSerializer().Serialize(res);
+                    link link = new link(Convert.ToInt32(Request["id_owner"]), Request["title"], Request["url"], Request["desc"]);
+                    response = link.new_link(link);
                     break;
 
                 default:
