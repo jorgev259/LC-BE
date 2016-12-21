@@ -25,8 +25,8 @@ namespace linkscloud.Models
         public user(string _username, string _email, string _password)
         {
             username = _username;
-            password = _email;
-            email = _password;
+            password = _password;
+            email = _email;
             joined = DateTime.Now;
         }
 
