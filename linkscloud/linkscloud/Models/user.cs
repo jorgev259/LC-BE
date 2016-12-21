@@ -122,7 +122,7 @@ namespace linkscloud.Models
             cnx.inicializa();
 
             MySqlCommand cmd = cnx.conexion.CreateCommand();
-            cmd.CommandText = "SELECT * FROM user WHERE email=@email AND password=@pass LIMIT 1;";
+            cmd.CommandText = "SELECT * FROM users WHERE email=@email AND password=@pass LIMIT 1;";
             cmd.Parameters.AddWithValue("@email",email);
             cmd.Parameters.AddWithValue("@pass",pass);
 
@@ -138,7 +138,7 @@ namespace linkscloud.Models
             {
                 dataReader.Close();
                 //No login
-                cmd.CommandText = "SELECT * FROM user WHERE email=@email LIMIT 1;";
+                cmd.CommandText = "SELECT * FROM users WHERE email=@email LIMIT 1;";
                 MySqlDataReader dataReader2 = cmd.ExecuteReader();
 
                  if (dataReader2.HasRows)
