@@ -19,67 +19,6 @@ namespace linkscloud.Models
 
         //solving the pics problem to introduce later
 
-        /*public variables
-        public int id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
-
-        public int id_owner
-        {
-            get
-            {
-                return _id_owner;
-            }
-            set
-            {
-                _id_owner = value;
-            }
-        }
-
-        public string title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
-        }
-
-        public string url
-        {
-            get
-            {
-                return _url;
-            }
-            set
-            {
-                _url = value;
-            }
-        }
-
-        public string desc
-        {
-            get
-            {
-                return _desc;
-            }
-            set
-            {
-                _desc = value;
-            }
-        }
-        */
 
         public link(int id_owner, string title, string url, string desc)
         {
