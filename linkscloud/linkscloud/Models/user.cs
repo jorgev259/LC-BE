@@ -122,7 +122,7 @@ namespace linkscloud.Models
             cnx.inicializa();
 
             MySqlCommand cmd = cnx.conexion.CreateCommand();
-            cmd.CommandText = "SELECT * FROM users WHERE email=@email AND password=@pass LIMIT 1;";
+            cmd.CommandText = "SELECT * FROM users WHERE (email=@email OR username=@email) AND password=@pass LIMIT 1;";
             cmd.Parameters.AddWithValue("@email",email);
             cmd.Parameters.AddWithValue("@pass",pass);
 
