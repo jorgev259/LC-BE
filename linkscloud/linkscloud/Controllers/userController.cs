@@ -28,8 +28,8 @@ namespace linkscloud.Controllers
                     break;
 
                 case "login":
-                    response = user.login(Request["username"],Request["pass"]);
-
+                    response = user.login(Request["email"],Request["pass"]);
+                   
                     break;
 
                 default:

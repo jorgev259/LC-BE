@@ -115,7 +115,7 @@ namespace linkscloud.Models
             return user;
         }
 
-        public static String login(String username,String pass)
+        public static String login(String email,String pass)
         {
             var cnx = new Coneccion();
             cnx.parametro();
@@ -125,8 +125,8 @@ namespace linkscloud.Models
             using (MySqlConnection connection = cnx.conexion)
             {
                 MySqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = "SELECT * FROM user WHERE username=@username AND passkey=@pass LIMIT 1;";
-                cmd.Parameters.AddWithValue("@username",username);
+                cmd.CommandText = "SELECT * FROM user WHERE email=@email AND passkey=@pass LIMIT 1;";
+                cmd.Parameters.AddWithValue("@email",email);
                 cmd.Parameters.AddWithValue("@pass",pass);
 
                 using (MySqlDataReader dataReader = cmd.ExecuteReader())
@@ -140,7 +140,7 @@ namespace linkscloud.Models
                     {
                         dataReader.Close();
                         //No login
-                        cmd.CommandText = "SELECT * FROM user WHERE username=@username LIMIT 1;";
+                        cmd.CommandText = "SELECT * FROM user WHERE email=@email LIMIT 1;";
                         MySqlDataReader dataReader2 = cmd.ExecuteReader();
 
                         if (dataReader2.HasRows)
@@ -162,5 +162,6 @@ namespace linkscloud.Models
                 }
             }
         }
+
     }
 }
