@@ -115,47 +115,39 @@ namespace linkscloud.Models
             cnx.parametro();
             cnx.inicializa();
 
+            MySqlCommand cmd = cnx.conexion.CreateCommand();
+            cmd.CommandText = "SELECT * FROM user WHERE email=@email AND passkey=@pass LIMIT 1;";
+            cmd.Parameters.AddWithValue("@email",email);
+            cmd.Parameters.AddWithValue("@pass",pass);
 
-            using (MySqlConnection connection = cnx.conexion)
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+
+            if (dataReader.HasRows())
             {
-                MySqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = "SELECT * FROM user WHERE email=@email AND passkey=@pass LIMIT 1;";
-                cmd.Parameters.AddWithValue("@email",email);
-                cmd.Parameters.AddWithValue("@pass",pass);
-
-                using (MySqlDataReader dataReader = cmd.ExecuteReader())
-                {
- 
-                    if (dataReader.HasRows)
-                    {
-                        return "logged";
-                    }
-                    else
-                    {
-                        dataReader.Close();
-                        //No login
-                        cmd.CommandText = "SELECT * FROM user WHERE email=@email LIMIT 1;";
-                        MySqlDataReader dataReader2 = cmd.ExecuteReader();
-
-                        if (dataReader2.HasRows)
-                        {
-                            //Wrong password
-                            return "Wrong Password";
-                        }
-                        else
-                        {
-                            //User doesnt exist
-                            return "Non-valid user";
-                        }
-                    }
-
-                    if(dataReader.IsClosed == false)
-                    {
-                        dataReader.Close();
-                    }
-                }
+               return "logged";
+               dataReader.Close();
             }
-        }
+            else
+            {
+                dataReader.Close();
+                //No login
+                cmd.CommandText = "SELECT * FROM user WHERE email=@email LIMIT 1;";
+                MySqlDataReader dataReader2 = cmd.ExecuteReader();
 
+                 if (dataReader2.HasRows())
+                 {
+                   return "Wrong Password";
+                 }
+                 else
+                 {      
+                   return "Non-valid user";
+                 }
+             }
+             if(dataReader.IsClosed() == false)
+             {
+                        dataReader.Close();
+             }
+        }
     }
 }
