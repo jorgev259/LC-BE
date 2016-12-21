@@ -129,7 +129,7 @@ namespace linkscloud.Models
             MySqlDataReader dataReader = cmd.ExecuteReader();
 
 
-            if (dataReader.HasRows())
+            if (dataReader.HasRows)
             {
                return "logged";
                dataReader.Close();
@@ -141,7 +141,7 @@ namespace linkscloud.Models
                 cmd.CommandText = "SELECT * FROM user WHERE email=@email LIMIT 1;";
                 MySqlDataReader dataReader2 = cmd.ExecuteReader();
 
-                 if (dataReader2.HasRows())
+                 if (dataReader2.HasRows)
                  {
                    return "Wrong Password";
                  }
@@ -150,7 +150,7 @@ namespace linkscloud.Models
                    return "Non-valid user";
                  }
              }
-             if(dataReader.IsClosed() == false)
+             if(dataReader.IsClosed == false)
              {
                         dataReader.Close();
              }
