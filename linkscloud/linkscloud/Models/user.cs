@@ -131,8 +131,8 @@ namespace linkscloud.Models
 
             if (dataReader.HasRows)
             {
-               return "logged";
-               dataReader.Close();
+                dataReader.Close();
+                return "logged";
             }
             else
             {
